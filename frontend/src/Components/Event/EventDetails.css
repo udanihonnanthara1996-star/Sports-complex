@@ -1,0 +1,132 @@
+.event-details {
+  max-width: 950px;
+  margin: 40px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #ffffff, #f9fbfc);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Header */
+.event-header {
+  border-bottom: 2px solid #edf2f7;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+.event-header h2 {
+  font-size: 26px;
+  color: #2d3748;
+  margin-bottom: 6px;
+}
+.event-header .event-deadline {
+  font-size: 14px;
+  color: #718096;
+}
+
+/* Info section */
+.event-info p {
+  margin: 8px 0;
+  color: #4a5568;
+  font-size: 15px;
+}
+.event-info strong {
+  color: #2d3748;
+}
+
+/* Registrations */
+.event-registrations h3 {
+  margin-top: 25px;
+  margin-bottom: 12px;
+  font-size: 20px;
+  color: #2d3748;
+  border-left: 4px solid #3182ce;
+  padding-left: 8px;
+}
+
+/* Table */
+.event-details table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.event-details th,
+.event-details td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+.event-details th {
+  background: #f7fafc;
+  font-weight: 600;
+  color: #2d3748;
+}
+.event-details tr:hover {
+  background: #f1f5f9;
+}
+
+/* Status badges */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.status-badge.approved {
+  background: #c6f6d5;
+  color: #22543d;
+}
+.status-badge.rejected {
+  background: #fed7d7;
+  color: #742a2a;
+}
+.status-badge.pending {
+  background: #feebc8;
+  color: #744210;
+}
+
+/* Approve / Reject buttons */
+.btn-approve,
+.btn-reject {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-right: 6px;
+  transition: 0.2s ease-in-out;
+  font-weight: 500;
+}
+.btn-approve {
+  background: #38a169;
+  color: white;
+}
+.btn-approve:hover {
+  background: #2f855a;
+}
+.btn-reject {
+  background: #e53e3e;
+  color: white;
+}
+.btn-reject:hover {
+  background: #c53030;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  font-size: 16px;
+  color: #4a5568;
+  margin-top: 50px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

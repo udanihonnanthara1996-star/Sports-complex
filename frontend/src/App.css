@@ -1,0 +1,58 @@
+/* Global CSS Reset to remove default margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Global Red Logout Button Styling */
+.logout, .btn-logout, button[title="Logout"] {
+  background-color: #e74c3c !important;
+  color: white !important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.logout:hover, .btn-logout:hover, button[title="Logout"]:hover {
+  background-color: #c0392b !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+}
+
+.logout:active, .btn-logout:active, button[title="Logout"]:active {
+  transform: translateY(0);
+}
+
+/* Ensure logout buttons in navigation bars are styled correctly */
+.header .logout,
+.feature-header .btn,
+.admin-header .btn {
+  background-color: #e74c3c !important;
+  color: white !important;
+}
+
+.header .logout:hover,
+.feature-header .btn:hover,
+.admin-header .btn:hover {
+  background-color: #c0392b !important;
+}

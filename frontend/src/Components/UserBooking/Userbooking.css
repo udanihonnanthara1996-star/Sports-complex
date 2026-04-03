@@ -1,0 +1,95 @@
+.user-booking-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.user-booking-header {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  padding: 20px 0;
+  border-bottom: 2px solid #667eea;
+}
+
+.user-booking-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.user-bookings-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.user-booking-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.user-booking-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.user-booking-card h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 10px;
+}
+
+.user-booking-details {
+  margin: 15px 0;
+}
+
+.user-booking-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-booking-detail:last-child {
+  border-bottom: none;
+}
+
+.user-booking-detail-label {
+  font-weight: 600;
+}
+
+.no-user-bookings {
+  text-align: center;
+  color: #666;
+  font-size: 1.2rem;
+  margin-top: 50px;
+  grid-column: 1 / -1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .user-booking-container {
+    padding: 10px;
+  }
+  
+  .user-booking-header h1 {
+    font-size: 2rem;
+  }
+  
+  .user-bookings-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .user-booking-card {
+    padding: 15px;
+  }
+}
