@@ -1,0 +1,227 @@
+.user-card {
+  border-radius: 15px;
+  padding: 25px;
+  margin: 20px 0;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(225, 232, 237, 0.8);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-card h2 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.user-card p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.user-card p strong {
+  min-width: 120px;
+  display: inline-block;
+  color: #333;
+  font-weight: 600;
+}
+
+.user-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.user-actions button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 100px;
+}
+
+.user-actions button:first-child {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
+}
+
+.user-actions button:first-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(67, 233, 123, 0.4);
+}
+
+.user-actions button:nth-child(2) {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.user-actions button:nth-child(2):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.user-actions button:last-child {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #333;
+  box-shadow: 0 4px 15px rgba(168, 237, 234, 0.3);
+}
+
+.user-actions button:last-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 237, 234, 0.4);
+}
+
+.edit-form .form-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.edit-form input,
+.edit-form select {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 2px solid #e1e8ed;
+  font-size: 15px;
+  background: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.edit-form input:focus,
+.edit-form select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+  transform: translateY(-2px);
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-top: 5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user-actions button.save {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+.user-actions button.cancel {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  color: #333;
+  box-shadow: 0 4px 15px rgba(168, 237, 234, 0.3);
+}
+
+.user-actions button.delete {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .users-list {
+    padding: 15px;
+  }
+  
+  .user-card {
+    padding: 20px 15px;
+    margin: 15px 0;
+  }
+  
+  .user-card h2 {
+    font-size: 20px;
+  }
+  
+  .user-card p {
+    font-size: 14px;
+  }
+  
+  .user-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .user-actions button {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .edit-form .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .edit-form input,
+  .edit-form select {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-card {
+    padding: 15px 12px;
+  }
+  
+  .user-card h2 {
+    font-size: 18px;
+  }
+  
+  .user-card p {
+    font-size: 13px;
+  }
+  
+  .user-actions button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+}

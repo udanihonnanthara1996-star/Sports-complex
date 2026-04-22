@@ -1,0 +1,115 @@
+.booking-form-container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.booking-form h2 {
+  color: white;
+  text-align: center;
+  margin-top: 0;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form input {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form input:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.booking-form input::placeholder {
+  color: #999;
+}
+
+.booking-form select,
+.booking-form textarea {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form select:focus,
+.booking-form textarea:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.booking-error {
+  padding: 12px 16px;
+  background: rgba(255, 76, 76, 0.15);
+  color: #ff4c4c;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 76, 76, 0.3);
+}
+
+.booking-warning {
+  padding: 12px 16px;
+  background: rgba(255, 193, 7, 0.14);
+  color: #856404;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.booking-form button {
+  padding: 15px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.booking-form button:hover {
+  background: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+}
+
+.booking-form button:active {
+  transform: translateY(0);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .booking-form-container {
+    margin: 10px;
+    padding: 20px;
+  }
+  
+  .booking-form input,
+  .booking-form button {
+    padding: 12px;
+  }
+}

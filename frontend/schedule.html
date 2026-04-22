@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule - SportBook</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/calendar.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand"><a href="index.html">🏟️ SportBook</a></div>
+    <div class="nav-links" id="navLinks"></div>
+  </nav>
+  <main class="schedule-page">
+    <h1>Facility Schedule</h1>
+    <div class="schedule-controls">
+      <label for="scheduleFacility">Select Facility:</label>
+      <select id="scheduleFacility"></select>
+      <label for="scheduleDate">Select Date:</label>
+      <input type="date" id="scheduleDate" value="">
+      <button class="btn btn-primary" onclick="loadSchedule()">View Schedule</button>
+    </div>
+    <div id="scheduleGrid" class="schedule-grid"></div>
+  </main>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/schedule.js"></script>
+</body>
+</html>

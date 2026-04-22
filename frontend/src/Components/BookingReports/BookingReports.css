@@ -1,0 +1,114 @@
+.booking-reports-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.booking-reports-header {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  padding: 20px 0;
+  border-bottom: 2px solid #667eea;
+}
+
+.booking-reports-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.booking-reports-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.booking-reports-table-wrap {
+  overflow-x: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+}
+
+.report-export-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.report-export-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #333;
+}
+
+.report-export-label select,
+.report-export-label input {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  min-width: 200px;
+}
+
+.export-button {
+  border: none;
+  background: #667eea;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.export-button:hover {
+  background: #4a52d5;
+}
+
+.booking-reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.booking-reports-table th,
+.booking-reports-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.booking-reports-table th {
+  background: #f8f9ff;
+  color: #333;
+  font-weight: 600;
+}
+
+.booking-reports-table tr:hover td {
+  background: #fafbff;
+}
+
+.booking-reports-empty {
+  text-align: center;
+  color: #666;
+  padding: 48px 16px;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .booking-reports-container {
+    padding: 10px;
+  }
+
+  .booking-reports-header h1 {
+    font-size: 2rem;
+  }
+}

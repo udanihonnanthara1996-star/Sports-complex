@@ -1,0 +1,348 @@
+/* Global container */
+.dashboard-container {
+  padding: 32px;
+  background: linear-gradient(135deg, #000000 0%, #0f172a 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e2e8f0;
+}
+
+/* Loading State */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #e2e8f0;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #374151;
+  border-top: 4px solid #22c55e;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dashboard Header */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-title {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  letter-spacing: -0.5px;
+}
+.dashboard-title span.blue {
+  color: #22c55e; /* neon green */
+}
+.dashboard-title span.yellow {
+  color: #ffffff; /* white */
+}
+
+.dashboard-subtitle {
+  font-size: 16px;
+  color: #94a3b8;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Month selector */
+.month-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.month-selector label {
+  font-weight: 600;
+  color: #e2e8f0;
+  font-size: 16px;
+}
+.month-selector select {
+  padding: 12px 18px;
+  border-radius: 8px;
+  border: 1px solid #22c55e;
+  background: rgba(255,255,255,0.05);
+  color: #e2e8f0;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+.month-selector select:hover {
+  border-color: #34d399;
+  background: rgba(255,255,255,0.1);
+}
+.current-month-indicator {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+/* Stat Cards Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.03);
+  padding: 24px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid rgba(34,197,94,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stat-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.stat-icon {
+  font-size: 32px;
+  opacity: 0.8;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-card h3 {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.stat-card p.value {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  color: #22c55e;
+}
+.stat-card p.change {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* Charts Grid */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+  margin-bottom: 48px;
+}
+
+.chart-box {
+  background: rgba(255,255,255,0.03);
+  padding: 24px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  border: 1px solid rgba(34,197,94,0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.chart-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+.chart-box h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+}
+
+.chart-description {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* Events Table at bottom */
+.events-table-container {
+  background: rgba(255,255,255,0.03);
+  padding: 28px;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  border: 1px solid rgba(34,197,94,0.2);
+}
+
+.table-header {
+  margin-bottom: 24px;
+}
+
+.table-header h3 {
+  margin-bottom: 8px;
+  font-size: 22px;
+  color: #22c55e;
+}
+
+.table-description {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.no-events-message {
+  text-align: center;
+  padding: 60px 20px;
+  color: #94a3b8;
+}
+
+.no-events-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
+
+.no-events-message h4 {
+  font-size: 20px;
+  color: #e2e8f0;
+  margin-bottom: 12px;
+}
+
+.no-events-message p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.events-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.events-table th {
+  background: rgba(34,197,94,0.15);
+  text-align: left;
+  padding: 16px 12px;
+  color: #22c55e;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 12px;
+}
+
+.events-table td {
+  padding: 16px 12px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+.events-table tr:hover td {
+  background: rgba(255,255,255,0.05);
+}
+
+.event-title-cell strong {
+  display: block;
+  color: #e2e8f0;
+  margin-bottom: 4px;
+}
+
+.event-title-cell small {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.event-type-badge {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.participants-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.participant-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: #22c55e;
+}
+
+.participant-bar {
+  width: 60px;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.participant-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #16a34a);
+  transition: width 0.3s ease;
+}
+
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.upcoming {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.status-badge.ongoing {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+.status-badge.completed {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+.status-badge.cancelled {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 30px;
+  }
+  .stat-card p.value {
+    font-size: 28px;
+  }
+}
