@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log("URI =", process.env.MONGO_URI);
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -89,7 +90,7 @@ mongoose.connection.on('reconnected', () => {
 });
 
 // Connect MongoDB with improved error handling
-mongoose.connect("mongodb+srv://hansaninavodya825_db_user:hAgmdDYQ2U9FPfzA@hansani.xoabwdi.mongodb.net/sports_complex?retryWrites=true&w=majority", mongoOptions)
+mongoose.connect(process.env.MONGO_URI, mongoOptions)
   .then(() => {
     console.log("MongoDB connection established");
     app.listen(5001, () => console.log("Server running on port 5001"));
