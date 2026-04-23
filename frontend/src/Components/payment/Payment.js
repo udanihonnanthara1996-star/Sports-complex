@@ -25,25 +25,44 @@ function Payment() {
   const validate = () => {
     const newErrors = {};
     if (!formData.name.trim()) newErrors.name = "Name is required.";
+    
     if (!formData.email.trim()) {
       newErrors.email = "Email is required.";
     } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
       newErrors.email = "Invalid email format.";
     }
-    if (!formData.method) newErrors.method = "Payment method is required.";
+    
+    if (!formData.method) {
+      newErrors.method = "Payment method is required.";
+    }
+
+    const cleanCardN = formData.cardN.replace(/-/g, "");
     if (!formData.cardN.trim()) {
       newErrors.cardN = "Card number is required.";
-    } else if (!/^\d{12}$/.test(formData.cardN.replace(/-/g, ""))) {
-      newErrors.cardN = "Card number must be 12 digits.";
+    } else if (!/^\d{16}$/.test(cleanCardN)) {
+      newErrors.cardN = "Card number must be exactly 16 digits.";
+    } else if (formData.method === "Master Card" && !/^5[1-5]/.test(cleanCardN) && !/^2[2-7]/.test(cleanCardN)) {
+      newErrors.cardN = "Invalid Master Card number. It should start with 51-55 or 22-27.";
+    } else if (formData.method === "Credit Card" && !/^4/.test(cleanCardN)) {
+      // Assuming 'Credit Card' implies Visa in this context for demonstration
+      newErrors.cardN = "Invalid Visa Credit Card number. It should start with 4.";
     }
+
     if (!formData.sport) newErrors.sport = "Sport is required.";
     if (!formData.sportTime) newErrors.sportTime = "Booking time is required.";
-    if (!formData.amount.trim()) newErrors.amount = "Amount is required.";
+    
+    if (!formData.amount.trim()) {
+      newErrors.amount = "Amount is required.";
+    } else if (isNaN(formData.amount) || Number(formData.amount) <= 0) {
+      newErrors.amount = "Amount must be a valid positive number.";
+    }
+    
     if (!formData.phone.trim()) {
       newErrors.phone = "Phone number is required.";
     } else if (!/^\d{10}$/.test(formData.phone)) {
-      newErrors.phone = "Phone number must be 10 digits.";
+      newErrors.phone = "Phone number must be exactly 10 digits.";
     }
+    
     return newErrors;
   };
 
@@ -54,8 +73,14 @@ function Payment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validate();
+    
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      
+      // Create a single string of all errors to show in the popup alert
+      const errorMessage = Object.values(validationErrors).join("\n- ");
+      alert("Please fix the following validation errors:\n\n- " + errorMessage);
+      
       return;
     }
     try {
