@@ -1,5 +1,3 @@
-//iT2p1inTx5Hixzw4
-
 require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
@@ -7,13 +5,14 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const userRoutes = require('./Routes/userRoutes');
-const paymentRoutes = require("./Routes/PaymentRoutes"); 
+const paymentRoutes = require("./Routes/PaymentRoutes");
 const eventRoutes = require('./Routes/eventRoutes');
 const inventoryRoutes = require("./Routes/InventoryRoutes");
 const feedbackRoutes = require('./Routes/feedback.routes');
 const ticketRoutes = require('./Routes/ticket.routes');
 const bookingRoutes = require('./Routes/bookingRoutes');
 const facilityRoutes = require('./Routes/facilityRoutes');
+const membershipRoutes = require('./Routes/membershipRoutes');
 
 const app = express();
 
@@ -25,7 +24,7 @@ app.use(morgan('dev'));
 
 // Explicit CORS policy: allows the frontend dev server and common headers
 const corsOptions = {
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
     // Allow requests with no origin like mobile apps or curl
     if (!origin) return callback(null, true);
     try {
@@ -52,13 +51,14 @@ app.use(cors(corsOptions));
 
 // Routes
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/payments", paymentRoutes); 
+app.use("/api/v1/payments", paymentRoutes);
 app.use('/api/v1/events', eventRoutes);
 app.use("/api/v1/inventory", inventoryRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
 app.use('/api/v1/tickets', ticketRoutes);
 app.use('/api/v1/bookings', bookingRoutes);
 app.use('/api/v1/facilities', facilityRoutes);
+app.use('/api/v1/memberships', membershipRoutes);
 
 const mongoOptions = {
   useNewUrlParser: true,
