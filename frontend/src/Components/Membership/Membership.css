@@ -1,0 +1,889 @@
+/* Membership CSS */
+
+.membership-page {
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  background-color: #f8fafc;
+  min-height: 100vh;
+  padding-bottom: 3rem;
+}
+
+.membership-loading,
+.no-membership-card {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Hero Section */
+.membership-hero {
+  position: relative;
+  text-align: center;
+  padding: 4rem 1rem;
+  background: #1e293b;
+  color: white;
+  overflow: hidden;
+}
+
+.membership-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.membership-badge-tag {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.membership-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.membership-hero p {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+}
+
+/* Active Banner */
+.active-membership-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: -2rem auto 2rem;
+  padding: 1.5rem 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+.banner-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+}
+
+.view-membership-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.view-membership-btn:hover {
+  background: #1d4ed8;
+}
+
+/* Plans Grid */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.plan-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.featured-plan {
+  border: 2px solid #f59e0b;
+  transform: scale(1.05);
+}
+
+.featured-plan:hover {
+  transform: scale(1.05) translateY(-5px);
+}
+
+.featured-ribbon {
+  position: absolute;
+  top: 15px;
+  right: -35px;
+  background: #f59e0b;
+  color: white;
+  padding: 0.3rem 3rem;
+  transform: rotate(45deg);
+  font-size: 0.8rem;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.current-plan-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #10b981;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.plan-card-header {
+  padding: 2rem;
+  color: white;
+  text-align: center;
+}
+
+.plan-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.plan-name {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.plan-price {
+  font-size: 2.5rem;
+  font-weight: 800;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+.currency {
+  font-size: 1.2rem;
+  margin-right: 0.3rem;
+}
+
+.plan-duration {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: 0.5rem;
+}
+
+.plan-discount-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
+.plan-card-body {
+  padding: 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem 0;
+  flex-grow: 1;
+}
+
+.benefits-list li {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: flex-start;
+  color: #475569;
+}
+
+.benefit-check {
+  color: #10b981;
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.subscribe-btn {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.subscribe-btn:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.subscribe-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.subscribed-btn {
+  background: #10b981 !important;
+}
+
+.platinum-btn {
+  background: #0f2027;
+}
+
+.platinum-btn:hover:not(:disabled) {
+  background: #2c5364;
+}
+
+/* FAQ */
+.membership-faq {
+  max-width: 1000px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+
+.membership-faq h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #1e293b;
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.faq-item {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item h3 {
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* Payment Page */
+.membership-payment-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.payment-left-panel,
+.payment-right-panel {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 300px;
+}
+
+.order-summary-card h2,
+.payment-right-panel h2 {
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+}
+
+.order-plan-badge {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem;
+  background: #f1f5f9;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.order-details {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  color: #475569;
+}
+
+.order-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 1rem 0;
+}
+
+.order-total {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0;
+}
+
+.discount-highlight {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.secure-badge {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.payment-subtitle {
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.membership-payment-form .form-group {
+  margin-bottom: 1.5rem;
+}
+
+.membership-payment-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #334155;
+}
+
+.membership-payment-form input,
+.membership-payment-form select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.membership-payment-form input:focus,
+.membership-payment-form select:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.input-error {
+  border-color: #ef4444 !important;
+}
+
+.field-error {
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  display: block;
+}
+
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.pay-membership-btn {
+  width: 100%;
+  padding: 1.2rem;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 1rem;
+}
+
+.pay-membership-btn:hover:not(:disabled) {
+  background: #059669;
+}
+
+.pay-membership-btn:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Success Screen */
+.payment-success-container {
+  max-width: 600px;
+  margin: 4rem auto;
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.success-animation {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.success-details {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.success-detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.success-detail-item span {
+  color: #64748b;
+}
+
+.success-detail-item strong {
+  color: #1e293b;
+}
+
+.success-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.upgrade-btn {
+  padding: 0.8rem 1.5rem;
+  background: transparent;
+  color: #2563eb;
+  border: 2px solid #2563eb;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.upgrade-btn:hover {
+  background: #eff6ff;
+}
+
+/* My Membership Page */
+.my-membership-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.my-membership-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.membership-status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.status-badge.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-badge.expired,
+.status-badge.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.membership-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.info-item h4 {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.info-item p {
+  color: #1e293b;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.cancel-membership-btn {
+  background: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.cancel-membership-btn:hover {
+  background: #fef2f2;
+}
+
+.no-membership-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .form-row-2 { grid-template-columns: 1fr; }
+  .plans-grid { grid-template-columns: 1fr; }
+  .featured-plan { transform: none; }
+  .featured-plan:hover { transform: translateY(-5px); }
+  .active-membership-banner { flex-direction: column; gap: 1rem; text-align: center; }
+  .my-membership-details-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Membership Error ─────────────────────────────── */
+.membership-error {
+  max-width: 800px;
+  margin: 1rem auto;
+  padding: 1rem 1.5rem;
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* ── My Membership Header ─────────────────────────── */
+.my-membership-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.my-membership-header h1 {
+  font-size: 2rem;
+  color: #1e293b;
+  margin-bottom: 0.4rem;
+}
+.my-membership-header p {
+  color: #64748b;
+  font-size: 1rem;
+}
+
+/* ── Membership Card Visual ───────────────────────── */
+.membership-card-display {
+  margin-bottom: 2rem;
+}
+.membership-card-visual {
+  border-radius: 20px;
+  padding: 2rem;
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.membership-card-visual::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 50%;
+}
+.card-visual-top {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.card-plan-icon { font-size: 2.5rem; }
+.card-plan-name { font-size: 1.5rem; font-weight: 800; letter-spacing: 0.5px; }
+.card-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.3);
+  margin: 1rem 0;
+}
+.card-visual-bottom {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 600px) {
+  .card-visual-bottom { grid-template-columns: repeat(2, 1fr); }
+}
+.card-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.card-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  opacity: 0.75;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.card-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.days-left { font-size: 1.4rem; font-weight: 800; }
+.card-status {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+.status-active  { background: rgba(16,185,129,0.3); color: #ecfdf5; }
+.status-inactive{ background: rgba(239,68,68,0.3);  color: #fef2f2; }
+
+/* ── Progress Bar ─────────────────────────────────── */
+.membership-progress-section {
+  margin-top: 1.2rem;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 0.6rem;
+}
+.membership-progress-bar {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 99px;
+  overflow: hidden;
+}
+.membership-progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s ease;
+}
+
+/* ── Expiry Warning ───────────────────────────────── */
+.expiry-warning {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.warning-icon { font-size: 1.8rem; flex-shrink: 0; }
+.expiry-warning div { flex: 1; }
+.expiry-warning p  { margin: 0.2rem 0 0; font-size: 0.9rem; color: #92400e; }
+.expiry-warning strong { color: #78350f; }
+.renew-btn {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.1rem;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.renew-btn:hover { background: #d97706; }
+
+/* ── Detail Cards Grid ────────────────────────────── */
+.my-membership-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.detail-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.detail-card-icon { font-size: 2rem; }
+.detail-card h3  { font-size: 1rem; color: #334155; margin: 0; }
+.discount-percentage {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #10b981, #059669);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.discount-card p { color: #64748b; font-size: 0.9rem; margin: 0; }
+.book-now-btn {
+  margin-top: auto;
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+}
+.book-now-btn:hover { background: #1d4ed8; }
+.my-benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.my-benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  color: #475569;
+  font-size: 0.9rem;
+}
+.my-benefits-list .benefit-check { color: #10b981; font-weight: 700; flex-shrink: 0; }
+
+/* ── Action Buttons Row ───────────────────────────── */
+.my-membership-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.my-membership-actions .upgrade-btn,
+.my-membership-actions .cancel-membership-btn {
+  flex: 1;
+  min-width: 160px;
+  text-align: center;
+}
+
+/* ── Cancel Confirm Modal ─────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.confirm-modal {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  animation: popIn 0.25s ease;
+}
+@keyframes popIn {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+.modal-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+.confirm-modal h3 { font-size: 1.4rem; color: #1e293b; margin-bottom: 0.8rem; }
+.confirm-modal p  { color: #64748b; margin-bottom: 1.5rem; line-height: 1.6; }
+.modal-actions { display: flex; gap: 1rem; justify-content: center; }
+.modal-confirm-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-confirm-btn:hover:not(:disabled) { background: #dc2626; }
+.modal-confirm-btn:disabled { background: #94a3b8; cursor: not-allowed; }
+.modal-cancel-btn {
+  background: transparent;
+  color: #334155;
+  border: 2px solid #cbd5e1;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.modal-cancel-btn:hover { background: #f1f5f9; }
