@@ -1,0 +1,230 @@
+.event-list {
+  padding: 24px;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e2e8f0;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.event-list h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #22c55e;
+}
+
+.page-description {
+  font-size: 16px;
+  color: #94a3b8;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Filters row */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  justify-content: center;
+}
+
+/* Search bars & select & date input */
+.search-bar {
+  padding: 10px 14px;
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  font-size: 14px;
+  background: rgba(255,255,255,0.05);
+  color: #f5f6f7;
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+.search-bar:focus {
+  outline: none;
+  border-color: #16a34a;
+  background: rgba(255,255,255,0.1);
+}
+
+
+/* Date picker input: black background, green border, green text */
+.date-picker {
+  background: #000;
+  color: #22c55e;
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+.date-picker:focus {
+  outline: none;
+  border-color: #16a34a;
+  background: #111;
+}
+
+/* Calendar icon: white */
+.date-picker::-webkit-calendar-picker-indicator {
+  background-color: #e8e9e8;
+  color: #22c55e;
+  border-radius: 4px;
+  opacity: 1;
+}
+.date-picker::-ms-input-placeholder {
+  color: #1cc822;
+}
+.date-picker::placeholder {
+  color: #22c55e;
+}
+
+/* Dropdown select style */
+.search-bar option {
+  background: #ffffff;
+  color: #000000;
+}
+
+/* Table styles */
+.event-list table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.event-list table thead {
+  background: rgba(34,197,94,0.2);
+  color: #22c55e;
+  text-align: left;
+}
+
+.event-list table th,
+.event-list table td {
+  padding: 14px 18px;
+  font-size: 14px;
+}
+
+.event-list table tbody tr {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.2s ease;
+}
+
+.event-list table tbody tr:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+/* Buttons */
+.btn-edit,
+.btn-delete,
+.btn-view {
+  padding: 8px 12px;
+  margin-right: 6px;
+  font-size: 13px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+/* Edit button */
+.btn-edit {
+  background: #22c55e;
+  color: #ffffff;
+}
+.btn-edit:hover {
+  background: #16a34a;
+}
+
+/* Delete button */
+.btn-delete {
+  background: #ef4444;
+  color: #ffffff;
+}
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+/* put this at very bottom of EventList.css */
+
+
+/* View Details button: black and green gradient */
+.btn-view {
+  background: linear-gradient(135deg, #000000 60%, #22c55e 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(34,197,94,0.3);
+  transition: all 0.3s ease-in-out;
+}
+.btn-view:hover {
+  background: linear-gradient(135deg, #22c55e 60%, #000000 100%);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(34,197,94,0.6);
+}
+
+/* View Registrations button: black with green text */
+.btn-view-registrations {
+  background: #000;
+  color: #22c55e;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(34,197,94,0.3);
+  transition: all 0.3s ease-in-out;
+}
+.btn-view-registrations:hover {
+  background: #222;
+  color: #fff;
+  box-shadow: 0 0 14px rgba(34,197,94,0.6);
+}
+
+/* View Registrations button: black background */
+.btn-view-registrations {
+  background: #000;
+  color: #179a3a;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(34,197,94,0.3);
+  transition: all 0.3s ease-in-out;
+}
+.btn-view-registrations:hover {
+  background: #222;
+  box-shadow: 0 0 14px rgba(34,197,94,0.6);
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;
+  }
+  .search-bar {
+    width: 100%;
+  }
+  .event-list table th,
+  .event-list table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

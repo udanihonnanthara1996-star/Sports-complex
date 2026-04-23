@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - SportBook</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand"><a href="index.html">🏟️ SportBook</a></div>
+    <div class="nav-links" id="navLinks"></div>
+  </nav>
+  <main class="dashboard-page">
+    <div class="dashboard-header">
+      <h1>Dashboard</h1>
+      <p id="welcomeMsg"></p>
+    </div>
+    <!-- Admin Section -->
+    <div id="adminSection">
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="section">
+        <h2>All Bookings</h2>
+        <div id="allBookingsList" class="bookings-list"></div>
+      </div>
+    </div>
+    <!-- Customer Section -->
+    <div id="customerSection">
+      <div class="section">
+        <div class="section-header">
+          <h2>My Bookings</h2>
+          <a href="booking.html" class="btn btn-primary">New Booking</a>
+        </div>
+        <div id="myBookingsList" class="bookings-list"></div>
+      </div>
+    </div>
+  </main>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) { window.location.href = 'login.html'; return; }
+
+      document.getElementById('welcomeMsg').textContent = 'Welcome, ' + user.name + ' (' + user.role + ')';
+
+      if (user.role === 'admin') {
+        document.getElementById('adminSection').style.display = 'block';
+        const { bookings } = await api.getBookings();
+        const total = bookings.length;
+        const confirmed = bookings.filter(b => b.status === 'confirmed').length;
+        const revenue = bookings.reduce((s, b) => s + b.totalPrice, 0);
+        document.getElementById('statsGrid').innerHTML =
+          '<div class="stat-card"><h3>' + total + '</h3><p>Total Bookings</p></div>' +
+          '<div class="stat-card"><h3>' + confirmed + '</h3><p>Confirmed</p></div>' +
+          '<div class="stat-card"><h3>$' + revenue + '</h3><p>Revenue</p></div>';
+        renderBookings(bookings, 'allBookingsList', true);
+      } else {
+        document.getElementById('customerSection').style.display = 'block';
+        const { bookings } = await api.getBookings();
+        renderBookings(bookings, 'myBookingsList', false);
+      }
+    });
+
+    function renderBookings(bookings, containerId, isAdmin) {
+      const container = document.getElementById(containerId);
+      if (!bookings.length) { container.innerHTML = '<p class="empty">No bookings found</p>'; return; }
+      container.innerHTML = bookings.map(b => `
+        <div class="booking-card">
+          <div class="booking-info">
+            <h3>${b.facility ? b.facility.name : 'N/A'}</h3>
+            <p>📅 ${new Date(b.date).toLocaleDateString()} | ⏰ ${b.timeSlot}</p>
+            <p>💰 $${b.totalPrice} | Status: <span class="status-${b.status}">${b.status}</span></p>
+            ${isAdmin && b.user ? '<p>👤 ' + b.user.name + ' (' + b.user.email + ')</p>' : ''}
+          </div>
+          <div class="booking-actions">
+            <button class="btn btn-sm btn-secondary" onclick="editBooking('${b._id}')">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="cancelBooking('${b._id}')">Cancel</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function cancelBooking(id) {
+      if (!confirm('Cancel this booking?')) return;
+      await api.deleteBooking(id);
+      location.reload();
+    }
+
+    async function editBooking(id) {
+      const newTime = prompt('Enter new time slot (e.g. 10:00):');
+      if (!newTime) return;
+      await api.updateBooking(id, { timeSlot: newTime });
+      location.reload();
+    }
+  </script>
+</body>
+</html>

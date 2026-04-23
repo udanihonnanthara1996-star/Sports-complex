@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports - SportBook</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand"><a href="index.html">🏟️ SportBook</a></div>
+    <div class="nav-links" id="navLinks"></div>
+  </nav>
+  <main class="reports-page">
+    <h1>Booking Reports</h1>
+    <div class="report-controls">
+      <button class="btn btn-primary" onclick="loadReport('weekly')">Weekly Report</button>
+      <button class="btn btn-secondary" onclick="loadReport('monthly')">Monthly Report</button>
+      <div class="custom-range">
+        <label for="reportStart">Start Date</label>
+        <input type="date" id="reportStart">
+        <label for="reportEnd">End Date</label>
+        <input type="date" id="reportEnd">
+        <button class="btn btn-primary" onclick="loadCustomReport()">Custom Report</button>
+      </div>
+    </div>
+    <div id="reportContent" class="report-content"></div>
+  </main>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    async function loadReport(type) {
+      const data = await api.getReport(type);
+      renderReport(data.report);
+    }
+    async function loadCustomReport() {
+      const start = document.getElementById('reportStart').value;
+      const end = document.getElementById('reportEnd').value;
+      if (!start || !end) { alert('Select start and end dates'); return; }
+      const data = await api.getReport('custom', start, end);
+      renderReport(data.report);
+    }
+    function renderReport(r) {
+      const facilityRows = Object.entries(r.byFacility).map(([name, d]) =>
+        '<tr><td>' + name + '</td><td>' + d.count + '</td><td>$' + d.revenue + '</td></tr>'
+      ).join('');
+      document.getElementById('reportContent').innerHTML = `
+        <div class="report-summary">
+          <div class="stat-card"><h3>${r.totalBookings}</h3><p>Total Bookings</p></div>
+          <div class="stat-card"><h3>$${r.totalRevenue}</h3><p>Total Revenue</p></div>
+          <div class="stat-card"><h3>${r.confirmedCount}</h3><p>Confirmed</p></div>
+          <div class="stat-card"><h3>${r.cancelledCount}</h3><p>Cancelled</p></div>
+        </div>
+        <h3>By Facility</h3>
+        <table class="report-table">
+          <thead><tr><th>Facility</th><th>Bookings</th><th>Revenue</th></tr></thead>
+          <tbody>${facilityRows}</tbody>
+        </table>
+      `;
+    }
+  </script>
+</body>
+</html>

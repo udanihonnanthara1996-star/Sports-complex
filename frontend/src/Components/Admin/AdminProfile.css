@@ -1,0 +1,25 @@
+.admin-profile-card{
+  max-width:720px;
+  margin:24px auto;
+  padding:20px;
+  background: #fff;
+  border-radius:8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+.admin-profile-card h2{ margin:0 0 12px 0; }
+.field-row{ display:flex; flex-direction:column; margin-bottom:12px; }
+.field-row label{ font-size:0.9rem; color:#333; margin-bottom:6px; }
+.field-row input{ padding:10px 12px; border-radius:6px; border:1px solid #ddd; font-size:1rem; }
+.admin-actions{ display:flex; gap:8px; margin-top:8px; }
+.btn-edit{ background:#007bff; color:#fff; padding:8px 12px; border:none; border-radius:6px; }
+.btn-save{ background:#28a745; color:#fff; padding:8px 12px; border:none; border-radius:6px; }
+.btn-cancel{ background:#6c757d; color:#fff; padding:8px 12px; border:none; border-radius:6px; }
+.api-error{ color:crimson; margin-bottom:8px; }
+
+.profile-top{ display:flex; gap:18px; align-items:center; margin-bottom:18px; }
+.photo-wrap{ width:96px; height:96px; display:flex; align-items:center; justify-content:center; }
+.photo-preview{ width:96px; height:96px; object-fit:cover; border-radius:8px; border:1px solid #eee; }
+.photo-placeholder{ width:96px; height:96px; display:flex; align-items:center; justify-content:center; background:#f0f4f8; color:#334; font-weight:700; border-radius:8px; }
+.photo-actions{ display:flex; flex-direction:column; gap:8px; }
+.btn-upload{ background:#0d6efd; color:#fff; padding:6px 10px; border-radius:6px; border:none; }
+.btn-remove{ background:#dc3545; color:#fff; padding:6px 10px; border-radius:6px; border:none; }

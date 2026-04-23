@@ -1,0 +1,72 @@
+/* AddUser.css */
+.add-user-container {
+  margin: 32px auto;
+  max-width: 340px;
+  padding: 32px 24px 28px 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(40,40,40,0.05);
+}
+
+.add-user-container h1 {
+  margin-bottom: 22px;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-align: center;
+  color: #1b5e20;
+}
+
+.add-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.add-user-form label {
+  font-weight: 600;
+  margin-bottom: 3px;
+  margin-top: 8px;
+  color: #009e42;
+}
+
+.add-user-form input[type="text"],
+.add-user-form input[type="email"],
+.add-user-form input[type="password"] {
+  font-size: 15px;
+  border: 1px solid #aaaaaa;
+  border-radius: 7px;
+  padding: 7px 11px;
+  margin-bottom: 7px;
+  outline: none;
+}
+
+.add-user-form input:focus {
+  border-color: #009e42;
+  background: #f2fdf2;
+}
+
+.add-user-form button {
+  margin-top: 14px;
+  padding: 9px 0;
+  border: none;
+  border-radius: 8px;
+  background: #009e42;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.add-user-form button:hover {
+  background: #007c2a;
+}
+
+@media (max-width: 500px) {
+  .add-user-container {
+    max-width: 97vw;
+    padding: 12px;
+  }
+  .add-user-form input { font-size: 13px; }
+}
