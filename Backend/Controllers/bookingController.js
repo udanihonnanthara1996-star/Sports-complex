@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Booking = require('../Model/booking');
 const Facility = require('../Model/facility');
 const User = require('../Model/User');
+const UserMembership = require('../Model/UserMembership');
 const { sendWhatsAppMessage } = require('../utils/whatsapp');
 const { validateBookingInput } = require('../utils/validators');
 
@@ -40,7 +41,27 @@ exports.createBooking = async (req, res) => {
     });
     if (existing) return res.status(409).json({ message: 'Time slot already booked' });
 
-    const totalPrice = facility.pricePerHour * (duration || 1);
+    // ── Membership Discount ─────────────────────────────────────────────
+    let discountPercentage = 0;
+    let membershipPlanName = null;
+    try {
+      const activeMembership = await UserMembership.findOne({
+        userId: req.user._id,
+        status: 'ACTIVE',
+        endDate: { $gt: new Date() },
+      }).populate('planId', 'name discountPercentage');
+      if (activeMembership && activeMembership.planId) {
+        discountPercentage = activeMembership.planId.discountPercentage || 0;
+        membershipPlanName = activeMembership.planId.name;
+      }
+    } catch (membershipErr) {
+      console.warn('Could not fetch membership info, proceeding without discount:', membershipErr.message);
+    }
+
+    const basePrice = facility.pricePerHour * (duration || 1);
+    const discountAmount = basePrice * (discountPercentage / 100);
+    const totalPrice = parseFloat((basePrice - discountAmount).toFixed(2));
+
     const booking = await Booking.create({
       user: req.user._id, facility: facilityId, date: new Date(date),
       timeSlot, duration: duration || 1, totalPrice, notes
@@ -48,6 +69,13 @@ exports.createBooking = async (req, res) => {
 
     const populatedBooking = await Booking.findById(booking._id)
       .populate('facility', 'name type').populate('user', 'name email phone');
+
+    // Attach discount info to the response so frontend can display it
+    const responseBooking = populatedBooking.toObject();
+    responseBooking.discountApplied = discountPercentage > 0;
+    responseBooking.discountPercentage = discountPercentage;
+    responseBooking.membershipPlan = membershipPlanName;
+    responseBooking.originalPrice = basePrice;
 
     // Send WhatsApp confirmation
     try {
@@ -62,7 +90,7 @@ exports.createBooking = async (req, res) => {
       console.error('WhatsApp notification failed:', whatsappErr.message);
     }
 
-    res.status(201).json({ booking: populatedBooking });
+    res.status(201).json({ booking: responseBooking });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
