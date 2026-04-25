@@ -12,9 +12,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0;
-  /* Remove any default margins */
   margin: 0;
+  /* Sticky navbar — stays at top while scrolling */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -158,3 +160,38 @@
 .logout:active {
   transform: translateY(0);
 }
+
+/* ── Membership Badge in Nav ──────────────────────────────── */
+.nav-membership-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--badge-color, #f6a623);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.nav-membership-badge:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+}
+
+.nav-membership-badge .badge-emoji {
+  font-size: 15px;
+  line-height: 1;
+}
+
+.nav-membership-badge .badge-label {
+  font-size: 12px;
+  font-weight: 700;
+}

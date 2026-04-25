@@ -36,7 +36,12 @@ import UserItemList from '../src/Components/Inventory/UserItemsList';
 import Dashboard2 from '../src/Components/Inventory/Dashboard2';
 import AdminBooking from  '../src/Components/Adminbooking/Adminbooking';
 import UserBooking from '../src/Components/UserBooking/Userbooking';
-import BookingReports from '../src/Components/BookingReports/BookingReports';// PublicRoute: if already authenticated, redirect to /home; otherwise render children (e.g., LandingPage)
+import BookingReports from '../src/Components/BookingReports/BookingReports';
+import MembershipPlans from './Components/Membership/MembershipPlans';
+import MembershipPayment from './Components/Membership/MembershipPayment';
+import MyMembership from './Components/Membership/MyMembership';
+
+// PublicRoute: if already authenticated, redirect to /home; otherwise render children (e.g., LandingPage)
 function PublicRoute({ children }) {
   const { auth } = useAuth();
   if (auth) {
@@ -105,6 +110,10 @@ function App() {
         <Route path="/customer/events/:id" element={<CustomerEventDetails />} />
         <Route path="/customer/events/:id/register" element={<RegisterEvent />} />
 
+        {/* ✅ Membership Routes */}
+        <Route path="/membership/plans" element={<ProtectedRoute><MembershipPlans /></ProtectedRoute>} />
+        <Route path="/membership/payment" element={<ProtectedRoute><MembershipPayment /></ProtectedRoute>} />
+        <Route path="/membership/my" element={<ProtectedRoute><MyMembership /></ProtectedRoute>} />
 
            
           {/* Password Reset Routes */}
