@@ -1,39 +1,61 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useAuth } from '../Context/AuthContext';
-import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+import { useAuth } from '../Context/AuthContext'; // Authentication context for user role
+import jsPDF from 'jspdf'; // PDF generation library
+import autoTable from 'jspdf-autotable'; // PDF table plugin
 import API from '../../utils/api';
-import { getBookingsArray } from '../../utils/bookingsApi';
+// Custom API wrapper
+import { getBookingsArray } from '../../utils/bookingsApi';// Normalizes API booking responses
+// Normalizes API booking responses
 import BookingForm from './BookingForm';
+// Reusable booking form component
 import './Userbooking.css';
+// Component styles
 import Nav from '../Nav/Nav';
 
+// Main navigation
 
+/**
+ * UserBooking Component - Multi-tab Dashboard
+ * - 4 tabs: Create, List, History (filtered), Schedule (weekly/monthly)
+ * - Supports both user-specific (userId prop) and admin views
+ * - Real-time filtering, PDF export, schedule grouping by date
+ * - Role-based endpoints (admin vs user schedule)
+ */
 function UserBooking({ userId }) {
-    const { auth } = useAuth();
-    const [bookings, setBookings] = useState([]);
-    const [editingBooking, setEditingBooking] = useState(null);
-    const [activeTab, setActiveTab] = useState('create');
-    const [loading, setLoading] = useState(false);
+    // userId prop filters to specific user (admin usage)
+    const { auth } = useAuth();// Get current user auth state (role, token)
+    // === CORE STATE ===
+    const [bookings, setBookings] = useState([]);// User's bookings list
+    const [editingBooking, setEditingBooking] = useState(null);// Currently editing booking
+    const [activeTab, setActiveTab] = useState('create');// Active tab: 'create' | 'list' | 'history' | 'schedule'
+    const [loading, setLoading] = useState(false);// Bookings loading state
+    // === FILTERING STATE (History tab) ===
     const [filters, setFilters] = useState({
-        status: '',
-        dateFrom: '',
-        dateTo: ''
+        status: '', // 'confirmed', 'cancelled', 'completed'
+        dateFrom: '',// YYYY-MM-DD
+        dateTo: ''// YYYY-MM-DD
     });
-    const [scheduleMode, setScheduleMode] = useState('weekly');
-    const [scheduleDate, setScheduleDate] = useState(new Date().toISOString().slice(0, 10));
-    const [scheduleData, setScheduleData] = useState(null);
-    const [scheduleLoading, setScheduleLoading] = useState(false);
-    const [scheduleError, setScheduleError] = useState('');
+    // === SCHEDULE STATE ===   
+    const [scheduleMode, setScheduleMode] = useState('weekly'); // 'weekly' | 'monthly'
+    const [scheduleDate, setScheduleDate] = useState(new Date().toISOString().slice(0, 10));// YYYY-MM-DD
+    const [scheduleData, setScheduleData] = useState(null); // Backend schedule response
+    const [scheduleLoading, setScheduleLoading] = useState(false);// Schedule loading state
+    const [scheduleError, setScheduleError] = useState(''); // Schedule errors
 
+    // === BOOKINGS FETCHING (useCallback prevents unnecessary re-renders) ===
+    /**
+     * Fetch and filter user's bookings
+     * - Admin view: userId prop filters to specific user
+     * - User view: Filters client-side by current user
+     */
     const fetchBookings = useCallback(async () => {
         setLoading(true);
         try {
-            const res = await API.get('/api/v1/bookings');
-            const list = getBookingsArray(res);
-            if (userId) {
+            const res = await API.get('/api/v1/bookings');// GET all bookings
+            const list = getBookingsArray(res); // Normalize response
+            if (userId) { // Admin filtering by specific userId
                 setBookings(list.filter((b) => String(b.user?._id || b.user) === String(userId)));
-            } else {
+            } else { // Current user bookings only
                 setBookings(list);
             }
         } catch (err) {
@@ -43,15 +65,22 @@ function UserBooking({ userId }) {
         }
     }, [userId]);
 
+     // Fetch bookings when component mounts or userId changes
     useEffect(() => {
         fetchBookings();
     }, [fetchBookings]);
 
+    // === EDIT HANDLER ===
     const handleEdit = (booking) => {
         setEditingBooking(booking);
-        setActiveTab('create');
+        setActiveTab('create');// Switch to create tab for editing
     };
-
+// === SCHEDULE FETCHING (Role-based endpoints) ===
+    /**
+     * Fetch schedule data (weekly/monthly) with role-based endpoints
+     * - User: '/api/v1/bookings/schedule' (personal schedule)
+     * - Admin: '/api/v1/bookings/schedule/admin' (full facility schedule)
+     */
     const fetchSchedule = useCallback(async () => {
         if (!scheduleDate) return;
         setScheduleLoading(true);
@@ -64,7 +93,7 @@ function UserBooking({ userId }) {
                     period: scheduleMode,
                 },
             });
-            setScheduleData(res.data);
+            setScheduleData(res.data);// { summary, groupedBookings, start, end }
         } catch (err) {
             setScheduleError(err.response?.data?.message || err.message || 'Unable to load schedule');
             setScheduleData(null);
@@ -73,46 +102,51 @@ function UserBooking({ userId }) {
         }
     }, [auth?.role, scheduleDate, scheduleMode]);
 
+    // === DELETE HANDLER ===
     const handleDelete = async (bookingId) => {
         if (!window.confirm('Are you sure you want to delete this booking?')) return;
         try {
             await API.delete(`/api/v1/bookings/${bookingId}`);
-            fetchBookings();
+            fetchBookings();// Refresh list after deletion
         } catch (err) {
             console.error('Failed to delete booking:', err);
         }
     };
 
+    // === FILTER HANDLER ===
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
         setFilters(prev => ({ ...prev, [name]: value }));
     };
 
+    // Fetch schedule when schedule tab becomes active
     useEffect(() => {
         if (activeTab === 'schedule') {
             fetchSchedule();
         }
     }, [activeTab, fetchSchedule]);
 
+    // === CLIENT-SIDE FILTERING (History tab) ===
     const filteredBookings = bookings.filter(booking => {
         const bookingDate = new Date(booking.date);
         const fromDate = filters.dateFrom ? new Date(filters.dateFrom) : null;
         const toDate = filters.dateTo ? new Date(filters.dateTo) : null;
-
+        // Status filter
         if (filters.status && booking.status !== filters.status) return false;
+        // Date range filter
         if (fromDate && bookingDate < fromDate) return false;
         if (toDate && bookingDate > toDate) return false;
 
         return true;
     });
-
+    // === SCHEDULE SUMMARY ===
     const scheduleSummary = {
         total: scheduleData?.summary?.total || 0,
         confirmed: scheduleData?.summary?.confirmed || 0,
         cancelled: scheduleData?.summary?.cancelled || 0,
         revenue: scheduleData?.summary?.revenue || 0,
     };
-
+    // === PDF EXPORT (Schedule) ===
     const handleDownloadSchedulePDF = () => {
         const periodLabel = scheduleMode === 'weekly' ? 'Weekly' : 'Monthly';
         const startLabel = new Date(scheduleData?.start).toLocaleDateString();
@@ -123,7 +157,8 @@ function UserBooking({ userId }) {
         doc.setFontSize(10);
         doc.text(`Period: ${startLabel} - ${endLabel}`, 14, 26);
         doc.text(`Generated: ${new Date().toLocaleDateString()}`, 14, 34);
-
+    
+        // Table data with fallbacks
         const rows = (scheduleData?.bookings || []).map((b) => [
             b.facility?.name ?? '—',
             b.facility?.type ?? '—',
@@ -139,7 +174,7 @@ function UserBooking({ userId }) {
                 body: rows,
                 startY: 42,
                 styles: { fontSize: 9 },
-                headStyles: { fillColor: [102, 126, 234] },
+                headStyles: { fillColor: [102, 126, 234] },// Blue header
             });
         } else {
             doc.text('No bookings found for this period.', 14, 44);
@@ -147,22 +182,23 @@ function UserBooking({ userId }) {
 
         doc.save(`booking-schedule-${scheduleMode}-${scheduleDate}.pdf`);
     };
-
+   // === JSX RENDER ===
     return (
         <div className="user-booking-container">
-            <Nav />
+            <Nav /> {/* Main navigation */}
+            {/* Page Header */}
             <div className="user-booking-header">
                 <h1>Your Bookings</h1>
                 <p>Manage your personal bookings</p>
             </div>
-
+            {/* ── TAB NAVIGATION ── */}
             <div className="booking-tabs">
                 <button
                     type="button"
                     className={activeTab === 'create' ? 'tab-button active' : 'tab-button'}
                     onClick={() => {
                         setActiveTab('create');
-                        setEditingBooking(null);
+                        setEditingBooking(null);// Clear edit mode
                     }}
                 >
                     Create Booking
@@ -189,7 +225,7 @@ function UserBooking({ userId }) {
                     Schedule
                 </button>
             </div>
-
+            {/* ── TAB: CREATE ── */}
             {activeTab === 'create' && (
                 <BookingForm
                     fetchBookings={fetchBookings}
@@ -197,7 +233,7 @@ function UserBooking({ userId }) {
                     setEditingBooking={setEditingBooking}
                 />
             )}
-
+            {/* ── TAB: LIST (Active/Current bookings) ── */}
             {activeTab === 'list' && (
                 <div className="user-bookings-list">
                     {loading ? (
@@ -206,7 +242,7 @@ function UserBooking({ userId }) {
                         bookings.map(b => (
                             <div className="user-booking-card" key={b._id}>
                                 <h3>Booking Details</h3>
-                                <div className="user-booking-details">
+                                <div className="user-booking-details">  {/* Key booking details with fallbacks */}
                                     <div className="user-booking-detail">
                                         <span className="user-booking-detail-label">Facility:</span>
                                         <span className="user-booking-detail-value">{b.facility?.name ?? '—'}</span>
@@ -230,7 +266,7 @@ function UserBooking({ userId }) {
                                     <div className="user-booking-detail">
                                         <span className="user-booking-detail-label">Status:</span>
                                         <span className="user-booking-detail-value">{b.status ?? '—'}</span>
-                                    </div>
+                                    </div> {/* Action buttons */}
                                 </div>
                                 <div className="booking-card-actions">
                                     <button type="button" onClick={() => handleEdit(b)} className="action-button">
@@ -249,9 +285,9 @@ function UserBooking({ userId }) {
                     )}
                 </div>
             )}
-
+        {/* ── TAB: HISTORY (Filtered + Stats) ── */}
             {activeTab === 'history' && (
-                <div className="booking-history-section">
+                <div className="booking-history-section"> {/* Filters */}
                     <div className="booking-filters">
                         <h3>Filter Bookings</h3>
                         <div className="filter-row">
@@ -291,7 +327,7 @@ function UserBooking({ userId }) {
                             </div>
                         </div>
                     </div>
-
+                    {/* Stats Cards */}
                     <div className="booking-history-stats">
                         <div className="stat-card">
                             <h4>{filteredBookings.length}</h4>
@@ -322,6 +358,7 @@ function UserBooking({ userId }) {
                                         <span className={`status-badge status-${b.status}`}>
                                             {b.status}
                                         </span>
+                                        {/* History details + price + notes */}
                                     </div>
                                     <div className="user-booking-details">
                                         <div className="user-booking-detail">
@@ -344,6 +381,7 @@ function UserBooking({ userId }) {
                                             <span className="user-booking-detail-label">Price:</span>
                                             <span className="user-booking-detail-value">${b.totalPrice ?? '—'}</span>
                                         </div>
+                                        {/* ... other details ... */}
                                     </div>
                                     {b.notes && (
                                         <div className="booking-notes">
@@ -360,9 +398,9 @@ function UserBooking({ userId }) {
                     </div>
                 </div>
             )}
-
+         {/* ── TAB: SCHEDULE (Weekly/Monthly + PDF Export) ── */}
             {activeTab === 'schedule' && (
-                <div className="booking-schedule-section">
+                <div className="booking-schedule-section"> {/* Schedule Controls */}
                     <div className="schedule-controls">
                         <div className="schedule-buttons">
                             <button
