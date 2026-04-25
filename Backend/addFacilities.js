@@ -1,17 +1,23 @@
+// Import Mongoose to connect to MongoDB and work with the database
 const mongoose = require('mongoose');
+// Import the Facility model to insert facility documents
 const Facility = require('./Model/facility');
+// Load environment variables from the .env file
 require('dotenv').config();
 
+// Seed the database with predefined facilities
 const addFacilities = async () => {
   try {
+    // Connect to MongoDB using the environment variable or fallback Atlas URI
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://hansaninavodya825_db_user:hAgmdDYQ2U9FPfzA@hansani.xoabwdi.mongodb.net/sports_complex?retryWrites=true&w=majority');
+    // Confirm that the database connection was successful
     console.log('Connected to MongoDB Atlas');
 
-    // Clear existing facilities
+    /// Remove all existing facility records before inserting new ones
     await Facility.deleteMany({});
     console.log('Cleared existing facilities');
 
-    // Create facilities with exact names requested
+    // Define the facility records to be inserted
     const facilities = [
       { 
         name: 'Main Gym', 
@@ -55,18 +61,23 @@ const addFacilities = async () => {
       }
     ];
 
+    // Insert all facility documents into the database at once
     const inserted = await Facility.insertMany(facilities);
+    // Log a success message and print each inserted facility
     console.log('✅ Successfully added facilities:');
     inserted.forEach((f, i) => {
       console.log(`${i + 1}. ${f.name} (${f.type}) - $${f.pricePerHour}/hour`);
     });
 
+    // Close the MongoDB connection after seeding is complete
     await mongoose.disconnect();
     console.log('Database connection closed');
   } catch (error) {
+    // Log any error that occurs during connection, deletion, or insertion
     console.error('Error:', error.message);
+    // Exit the process with a failure code
     process.exit(1);
   }
 };
-
+// Run the seed function to add facilities to the database
 addFacilities();
